@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <ul class="list-style-none">
+                <li><a [routerLink]="['/basic-drag']" routerLinkActive="router-link-active">Basic drag</a></li>
+                <li><a [routerLink]="['one-direction-only']">One direction only</a></li>
+                <li><a [routerLink]="['basic-list']">Basic list</a></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="col-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+</div>
