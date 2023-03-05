@@ -11,6 +11,7 @@ import { BasicDragComponent } from './screens/basic-drag/basic-drag.component';
 import { OneDirectionOnlyComponent } from './screens/one-direction-only/one-direction-only.component';
 import { DropiumDirective } from './directives/dropium.directive';
 import { BasicListComponent } from './screens/basic-list/basic-list.component';
+import { ConnectedListComponent } from './screens/connected-list/connected-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BasicListComponent } from './screens/basic-list/basic-list.component';
     BasicDragComponent,
     OneDirectionOnlyComponent,
     DropiumDirective,
-    BasicListComponent
+    BasicListComponent,
+    ConnectedListComponent
   ],
   imports: [
     BrowserModule,
