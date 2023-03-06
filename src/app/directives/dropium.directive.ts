@@ -41,7 +41,7 @@ export class DropiumDirective {
      this.previousContainer = this;
      this.container = this;    
      this.draggableElements.forEach(dragInstance => {
-      dragInstance.returnInitialPosition = this.returnInitialPosition;
+        dragInstance.returnInitialPosition = this.returnInitialPosition;
      });
   }
 
@@ -49,7 +49,8 @@ export class DropiumDirective {
 
     this.draggableElements.forEach(dragInstance => { 
 
-        if (this.returnInitialPosition) return;
+        if (!this.returnInitialPosition) return;
+        
         dragInstance.dragging.subscribe((isDragging)=> {            
           if (isDragging){
 
