@@ -7,7 +7,7 @@ import { OneDirectionOnlyComponent } from './screens/one-direction-only/one-dire
 import { WorkflowComponent } from './screens/workflow/workflow.component';
 
 const routes: Routes = [
-  { path: '', component:ConnectedListComponent,  pathMatch:'full' },
+  { path: '', component:WorkflowComponent,  pathMatch:'full' },
   { path: 'basic-drag', component:BasicDragComponent },
   { path: 'one-direction-only', component:OneDirectionOnlyComponent },
   { path: 'basic-list', component: BasicListComponent },

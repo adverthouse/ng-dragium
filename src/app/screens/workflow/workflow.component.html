@@ -1,10 +1,84 @@
-<div appDropium returnInitialPosition="false">
-    <div class="box" appDragium>basic drag works!</div>
-    <div class="box" appDragium>basic drag works!</div>
+<div appDropium returnInitialPosition="false" id="WorkflowContainer">
+    <div class="toolbox">
+        <button class="btn btn-default" (click)="zoomIn()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 60 60">
+                <path id="zoomin" d="M35.627,22.5v3.75a1.41,1.41,0,0,1-1.406,1.406H27.658v6.562a1.41,1.41,0,0,1-1.406,1.406H22.5a1.41,1.41,0,0,1-1.406-1.406V27.654H14.532a1.41,1.41,0,0,1-1.406-1.406V22.5a1.41,1.41,0,0,1,1.406-1.406h6.563V14.53A1.41,1.41,0,0,1,22.5,13.124h3.75a1.41,1.41,0,0,1,1.406,1.406v6.562H34.22A1.41,1.41,0,0,1,35.627,22.5Zm23.556,33.36-3.317,3.316a2.8,2.8,0,0,1-3.973,0L40.2,47.491a2.81,2.81,0,0,1-.82-1.992v-1.91A24.361,24.361,0,1,1,43.6,39.371h1.91a2.811,2.811,0,0,1,1.992.82L59.183,51.874A2.836,2.836,0,0,1,59.183,55.858ZM40.314,24.373A15.938,15.938,0,1,0,24.376,40.309,15.924,15.924,0,0,0,40.314,24.373Z" fill="#716f6b"/>
+            </svg>
+        </button>
+        <button class="btn btn-default" (click)="zoomReset()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 60 60">
+                <path id="fit" d="M23.486,33.794H10.359a2.815,2.815,0,0,0-1.993,4.8l3.856,3.633L.6,53.868a1.881,1.881,0,0,0,0,2.648l2.977,2.977a1.882,1.882,0,0,0,2.649,0L17.86,47.857l3.645,3.867A2.809,2.809,0,0,0,26.3,49.732V36.607A2.806,2.806,0,0,0,23.486,33.794Zm13.128-7.5H49.741a2.816,2.816,0,0,0,1.993-4.8l-3.868-3.633L59.5,6.22a1.881,1.881,0,0,0,0-2.648L56.528.595a1.882,1.882,0,0,0-2.649,0L42.24,12.232,38.595,8.364A2.809,2.809,0,0,0,33.8,10.357V23.482A2.806,2.806,0,0,0,36.614,26.294ZM47.866,42.232l3.868-3.645a2.808,2.808,0,0,0-1.993-4.793H36.614A2.806,2.806,0,0,0,33.8,36.607V49.732a2.817,2.817,0,0,0,4.806,1.992l3.634-3.855L53.879,59.505a1.882,1.882,0,0,0,2.649,0L59.5,56.529a1.881,1.881,0,0,0,0-2.648ZM21.494,8.376,17.86,12.232,6.221.595a1.882,1.882,0,0,0-2.649,0L.6,3.571A1.881,1.881,0,0,0,.6,6.22L12.234,17.857,8.366,21.5a2.808,2.808,0,0,0,1.993,4.793H23.486A2.806,2.806,0,0,0,26.3,23.482V10.357A2.816,2.816,0,0,0,21.494,8.376Z" transform="translate(-0.05 -0.05)" fill="#716f6b"/>
+            </svg>              
+        </button>
+        <button class="btn btn-default" (click)="zoomOut()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 60 60">
+                <path id="zoomout" d="M35.627,22.5v3.75a1.41,1.41,0,0,1-1.406,1.406H14.532a1.41,1.41,0,0,1-1.406-1.406V22.5a1.41,1.41,0,0,1,1.406-1.406H34.22A1.41,1.41,0,0,1,35.627,22.5Zm23.556,33.36-3.317,3.316a2.8,2.8,0,0,1-3.973,0L40.2,47.491a2.81,2.81,0,0,1-.82-1.992v-1.91A24.361,24.361,0,1,1,43.6,39.371h1.91a2.811,2.811,0,0,1,1.992.82L59.183,51.874A2.836,2.836,0,0,1,59.183,55.858ZM40.314,24.373A15.938,15.938,0,1,0,24.376,40.309,15.924,15.924,0,0,0,40.314,24.373Z" fill="#716f6b"/>
+              </svg>              
+        </button>
+    </div>
 
-    <div class="box" appDragium>basic drag works!</div>
+    <div [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 50px)','width':'100%' }">
 
-    <div class="box" appDragium>basic drag works!</div>
+        <div class="item" appDragium positionX="150" positionY="60">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120" style="position:relative;z-index:1200;">
+                <g id="start" transform="translate(-936 -569)">
+                <circle id="Ellipse_1" data-name="Ellipse 1" cx="60" cy="60" r="60" transform="translate(936 569)" fill="#2055bb"/>
+                <path id="Polygon_1" data-name="Polygon 1" d="M26,0,52,31H0Z" transform="translate(1011.5 603) rotate(90)" fill="#fff"/>
+                </g>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 56 56" style="position: relative;top:-10px;left:20px;z-index:900;">
+                <g id="Ellipse_4" data-name="Ellipse 4" fill="#fff" stroke="#dcdcdc" stroke-width="2">
+                    <circle cx="28" cy="28" r="28" stroke="none"/>
+                    <circle cx="28" cy="28" r="27" fill="none"/>
+                </g>
+            </svg>     
+        </div>
 
-    <div class="box" appDragium>basic drag works!</div>
+            <div class="item" appDragium positionX="150" positionY="160">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 169.706 169.706">
+                    <g id="decision" transform="translate(-1444.147 -336.147)">
+                    <rect id="Rectangle_3" data-name="Rectangle 3" width="120" height="120" rx="4" transform="translate(1529 336.147) rotate(45)" fill="#f0821d"/>
+                    <path id="Path_1" data-name="Path 1" d="M3367.345,435.656h54.1v-13.77h-24.389v-5.049h-8.942V422.4h-22.227l-6.733,6.733Z" transform="translate(-1863.424 -5.308)" fill="#fff"/>
+                    <path id="Path_2" data-name="Path 2" d="M52.125,18.986,0,18.822V5.189l10.977-.016L20.01,5.16l3.262,0V.116L31.9.089V5.655l1.9,0,19.758-.025,6.622,6.793Z" transform="translate(1502.093 387.432)" fill="#fff"/>
+                    <path id="Path_3" data-name="Path 3" d="M3388.3,442.39h9.28V450.8l7.1,5.486v3.595h-24.011v-3.595l7.628-5.486Z" transform="translate(-1863.424 -5.308)" fill="#fff"/>
+                    </g>
+                </svg>          
+            </div>
+
+            <div class="item" appDragium positionX="150" positionY="260">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
+                    <g id="screen" transform="translate(-1466 -809)">
+                    <rect id="Rectangle_4" data-name="Rectangle 4" width="120" height="120" rx="12" transform="translate(1466 809)" fill="#2055bb"/>
+                    <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(1492.5 839)" fill="none" stroke="#fff" stroke-width="4">
+                        <rect width="67" height="49" rx="12" stroke="none"/>
+                        <rect x="2" y="2" width="63" height="45" rx="10" fill="none"/>
+                    </g>
+                    <rect id="Rectangle_6" data-name="Rectangle 6" width="34" height="6" rx="3" transform="translate(1509.5 855)" fill="#fff"/>
+                    <rect id="Rectangle_7" data-name="Rectangle 7" width="34" height="11" rx="4" transform="translate(1509.5 864)" fill="#fff"/>
+                    <path id="Path_4" data-name="Path 4" d="M3393.08,893.912h8.754v5.077h7.288l4.052,4.8v4.323h-30.746v-4.323l4.862-4.8h5.791v-5.563" transform="translate(-1871.5)" fill="#fff"/>
+                    </g>
+                </svg>
+                
+            </div>
+
+            <div class="item" appDragium positionX="150" positionY="360">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
+                    <g id="Group_1" data-name="Group 1" transform="translate(-1969 -1197)">
+                    <rect id="Rectangle_11" data-name="Rectangle 11" width="120" height="120" rx="12" transform="translate(1969 1197)" fill="#f0821d"/>
+                    <rect id="Rectangle_12" data-name="Rectangle 12" width="63" height="14" rx="7" transform="translate(1998 1239)" fill="#fff"/>
+                    <rect id="Rectangle_13" data-name="Rectangle 13" width="63" height="14" rx="7" transform="translate(1998 1261)" fill="#fff"/>
+                    </g>
+                </svg>
+                
+            </div>
+
+            <div class="item" appDragium positionX="150" positionY="460">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
+                    <g id="stop" transform="translate(-1455 -1644)">
+                    <circle id="Ellipse_2" data-name="Ellipse 2" cx="60" cy="60" r="60" transform="translate(1455 1644)" fill="#c63434"/>
+                    <rect id="Rectangle_2" data-name="Rectangle 2" width="57" height="55" transform="translate(1487 1677)" fill="#fff"/>
+                    </g>
+                </svg>          
+            </div>
+        </div>
 </div>

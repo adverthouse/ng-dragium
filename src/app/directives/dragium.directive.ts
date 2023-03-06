@@ -13,24 +13,27 @@ export class DragiumDirective {
   @Input() returnInitialPosition:boolean = false;
   @Input() target:string = '';
   @Input() dragDirection:string = 'both';
-  @Input() positionX:any = 0;
-  @Input() positionY:any = 0; 
+  @Input() positionX:number = 0;
+  @Input() positionY:number = 0; 
   @Input() isSelected:boolean = false;
   @Input() Id:any;
 
-  private startX:any = 0;
-  private startY:any = 0;
+  private startX:number = 0;
+  private startY:number = 0;
 
   public Element:any;
-  private _preStyle:string = ''; 
-  
-
   constructor(private el: ElementRef) {        
     this.Element = this.el.nativeElement;
   }
 
-  ngOnInit(){    
-    this._preStyle = this.el.nativeElement.getAttribute('style') || "";    
+  ngOnInit(){     
+    if (this.positionX != 0 || this.positionY != 0 )   
+    {  
+      this.startX = this.positionX;
+      this.startY = this.positionY;
+
+      this.el.nativeElement.setAttribute('style',` transform: translate3d(${this.positionX}px,${this.positionY}px,0px)`);
+    }
   }
 
   @HostListener('mousedown',['$event'])
@@ -46,7 +49,7 @@ export class DragiumDirective {
         this.startY = event.clientY; 
 
         if (this.returnInitialPosition)
-        {
+        { 
            this.positionX = 0;
            this.positionY = 0;
         }
@@ -57,8 +60,9 @@ export class DragiumDirective {
   onMouseUp() {  
     this._isDragging = false;     
     this.dragging.emit(false);
+
     if (this.returnInitialPosition)
-       this.el.nativeElement.setAttribute('style',this._preStyle);  
+       this.el.nativeElement.setAttribute('style',"");  
   }
 
   @HostListener("click")
@@ -72,17 +76,22 @@ export class DragiumDirective {
     if (this._isDragging){ 
       this.dragging.emit(true);
 
+
       let diffX = event.clientX - this.startX;
-      let diffY = event.clientY - this.startY;
-      
+      let diffY = event.clientY - this.startY;     
+
       this.startX = event.clientX;
       this.startY = event.clientY;
 
-      
-      if (this.dragDirection == 'horizontal' || this.dragDirection == 'both') this.positionX += diffX; 
-      if (this.dragDirection == 'vertical' || this.dragDirection == 'both') this.positionY += diffY;
+      this.positionX = Number(this.positionX);
+      this.positionY = Number(this.positionY);
 
-      this.el.nativeElement.setAttribute('style',this._preStyle +`touch-action:none;
+      
+      if (this.dragDirection == 'horizontal' || this.dragDirection == 'both') this.positionX += Number(diffX); 
+      if (this.dragDirection == 'vertical' || this.dragDirection == 'both') this.positionY += Number(diffY);
+
+ 
+      this.el.nativeElement.setAttribute('style',`touch-action:none;
         -webkit-user-drag: none;
         -webkit-tap-highlight-color:transparent;
         user-select: none; 
