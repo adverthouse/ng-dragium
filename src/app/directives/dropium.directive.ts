@@ -20,6 +20,9 @@ export class DropiumDirective {
   @Input()
   connectedTo:DropiumDirective; 
 
+  @Input()
+  returnInitialPosition:boolean = true;
+
   @ContentChildren(DragiumDirective) draggableElements = new QueryList<DragiumDirective>();
 
   private newIndex?:number;
@@ -28,7 +31,7 @@ export class DropiumDirective {
   public previousContainer:DropiumDirective;
   public container:DropiumDirective;
   public Element:any;
-
+ 
 
   @Input() id: string = `dropium-id-${_uniqueId++}`;
 
@@ -37,13 +40,16 @@ export class DropiumDirective {
      this.Element = el.nativeElement; 
      this.previousContainer = this;
      this.container = this;    
+     this.draggableElements.forEach(dragInstance => {
+      dragInstance.returnInitialPosition = this.returnInitialPosition;
+     });
   }
 
   ngAfterContentInit() {
 
-    this.draggableElements.forEach(dragInstance => {
-        dragInstance.returnInitialPosition = true;
+    this.draggableElements.forEach(dragInstance => { 
 
+        if (this.returnInitialPosition) return;
         dragInstance.dragging.subscribe((isDragging)=> {            
           if (isDragging){
 

@@ -15,6 +15,7 @@ export class DragiumDirective {
   @Input() dragDirection:string = 'both';
   @Input() positionX:any = 0;
   @Input() positionY:any = 0; 
+  @Input() isSelected:boolean = false;
   @Input() Id:any;
 
   private startX:any = 0;
@@ -58,6 +59,11 @@ export class DragiumDirective {
     this.dragging.emit(false);
     if (this.returnInitialPosition)
        this.el.nativeElement.setAttribute('style',this._preStyle);  
+  }
+
+  @HostListener("click")
+  click(){
+     this.isSelected = !this.isSelected;
   }
 
   @HostListener('window:mousemove',['$event'])

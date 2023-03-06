@@ -12,6 +12,7 @@ import { OneDirectionOnlyComponent } from './screens/one-direction-only/one-dire
 import { DropiumDirective } from './directives/dropium.directive';
 import { BasicListComponent } from './screens/basic-list/basic-list.component';
 import { ConnectedListComponent } from './screens/connected-list/connected-list.component';
+import { WorkflowComponent } from './screens/workflow/workflow.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConnectedListComponent } from './screens/connected-list/connected-list.
     OneDirectionOnlyComponent,
     DropiumDirective,
     BasicListComponent,
-    ConnectedListComponent
+    ConnectedListComponent,
+    WorkflowComponent
   ],
   imports: [
     BrowserModule,
