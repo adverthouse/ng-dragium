@@ -26,13 +26,13 @@ export class DragiumDirective {
     this.Element = this.el.nativeElement;
   }
 
-  ngOnInit(){     
+  ngOnInit(){      
     if (this.positionX != 0 || this.positionY != 0 )   
     {  
       this.startX = this.positionX;
       this.startY = this.positionY;
 
-      this.el.nativeElement.setAttribute('style',` transform: translate3d(${this.positionX}px,${this.positionY}px,0px)`);
+      this.el.nativeElement.setAttribute('style',`transform: translate3d(${this.positionX}px,${this.positionY}px,0px)`);
     }
   }
 
@@ -58,11 +58,11 @@ export class DragiumDirective {
 
   @HostListener('window:mouseup') 
   onMouseUp() {  
-    this._isDragging = false;     
-    this.dragging.emit(false);
-
     if (this.returnInitialPosition)
-       this.el.nativeElement.setAttribute('style',"");  
+          this.el.nativeElement.setAttribute('style',"");  
+     
+    this._isDragging = false;     
+    this.dragging.emit(false);      
   }
 
   @HostListener("click")
