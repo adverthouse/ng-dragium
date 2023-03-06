@@ -1,16 +1,12 @@
 <div class="row">
     <div class="col-6">
-        <ul appDropium>
-            <li appDragium>item 1</li>
-            <li appDragium>item 2</li>
-            <li appDragium>item 3</li>
+        <ul appDropium #listOne="appDropium" [connectedTo]="listTwo" (dropped)="dropped($event)">
+            <li appDragium *ngFor="let item of itemsSource">{{item}}</li>   
          </ul>
     </div>
     <div class="col-6">
-        <ul appDropium>
-            <li appDragium>item 1</li>
-            <li appDragium>item 2</li>
-            <li appDragium>item 3</li>
+        <ul appDropium #listTwo="appDropium" [connectedTo]="listOne" (dropped)="dropped($event)">
+            <li appDragium *ngFor="let item of itemsTarget">{{item}}</li>   
          </ul>
     </div>
 </div>

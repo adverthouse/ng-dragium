@@ -1,3 +1,9 @@
+body {
+    background: white;
+    background-image: radial-gradient(rgb(214, 212, 212) 1px, transparent 0);
+    background-size: 10px 10px;
+    background-position: -19px -19px;
+}
 div.box {
     width: 100px;
     height: 100px;

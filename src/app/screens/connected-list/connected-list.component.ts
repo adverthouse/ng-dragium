@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { moveItemInArray, transferArrayItem } from 'src/app/directives/core/dragium-utils';
+import { dropEvent } from 'src/app/directives/events/drop-events';
 
 @Component({
   selector: 'app-connected-list',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectedListComponent implements OnInit {
 
+  itemsSource:string[] = ["Item S 1", "Item S 2","Item S 3"];
+  itemsTarget:string[] = ["Item T 1", "Item T 2","Item T 3"];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  dropped(event:dropEvent){    
+    if (event.previousContainer === event.container){
+      moveItemInArray(this.itemsSource,event.previousIndex,event.newIndex);     
+    } else {
+      transferArrayItem(this.itemsSource,this.itemsTarget,event.previousIndex,event.newIndex);
+    }
   }
 
 }

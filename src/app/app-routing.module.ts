@@ -6,7 +6,7 @@ import { ConnectedListComponent } from './screens/connected-list/connected-list.
 import { OneDirectionOnlyComponent } from './screens/one-direction-only/one-direction-only.component';
 
 const routes: Routes = [
-  { path: '', component:BasicListComponent,  pathMatch:'full' },
+  { path: '', component:ConnectedListComponent,  pathMatch:'full' },
   { path: 'basic-drag', component:BasicDragComponent },
   { path: 'one-direction-only', component:OneDirectionOnlyComponent },
   { path: 'basic-list', component: BasicListComponent },

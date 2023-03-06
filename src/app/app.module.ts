@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragiumDirective } from './directives/dragium.directive';
 import { HighlightDirective } from './directives/highlight.directive';
 
@@ -27,7 +27,8 @@ import { ConnectedListComponent } from './screens/connected-list/connected-list.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,    
+    FormsModule, 
+    ReactiveFormsModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

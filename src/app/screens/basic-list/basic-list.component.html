@@ -1,5 +1,3 @@
-<ul appDropium>
-   <li appDragium>item 1</li>
-   <li appDragium>item 2</li>
-   <li appDragium>item 3</li>
+<ul appDropium (dropped)="dropped($event)">
+   <li appDragium *ngFor="let item of items">{{item}}</li>   
 </ul>

@@ -7,29 +7,29 @@ import { Directive , ElementRef, EventEmitter, HostListener, Input, Output } fro
 export class DragiumDirective {
 
   @Output() 
-  public isDragging = new EventEmitter<Boolean>();
+  public dragging = new EventEmitter<Boolean>();
   private _isDragging:Boolean = false;
 
   @Input() returnInitialPosition:boolean = false;
   @Input() target:string = '';
   @Input() dragDirection:string = 'both';
   @Input() positionX:any = 0;
-  @Input() positionY:any = 0;
+  @Input() positionY:any = 0; 
+  @Input() Id:any;
 
   private startX:any = 0;
   private startY:any = 0;
 
-
-  private _dragDirection:string = 'both';
+  public Element:any;
   private _preStyle:string = ''; 
   
 
   constructor(private el: ElementRef) {        
-    this._preStyle = this.el.nativeElement.getAttribute('style') || "";  
-   }
+    this.Element = this.el.nativeElement;
+  }
 
   ngOnInit(){    
-      
+    this._preStyle = this.el.nativeElement.getAttribute('style') || "";    
   }
 
   @HostListener('mousedown',['$event'])
@@ -39,7 +39,7 @@ export class DragiumDirective {
 
       if (!this._isDragging) {
         this._isDragging = true; 
-        this.isDragging.emit(true);
+        this.dragging.emit(true);
 
         this.startX = event.clientX;
         this.startY = event.clientY; 
@@ -55,7 +55,7 @@ export class DragiumDirective {
   @HostListener('window:mouseup') 
   onMouseUp() {  
     this._isDragging = false;     
-    this.isDragging.emit(false);
+    this.dragging.emit(false);
     if (this.returnInitialPosition)
        this.el.nativeElement.setAttribute('style',this._preStyle);  
   }
@@ -63,8 +63,8 @@ export class DragiumDirective {
   @HostListener('window:mousemove',['$event'])
   onMouseMove(event:MouseEvent)
   {
-    if (this._isDragging){
-      this.isDragging.emit(true);
+    if (this._isDragging){ 
+      this.dragging.emit(true);
 
       let diffX = event.clientX - this.startX;
       let diffY = event.clientY - this.startY;
