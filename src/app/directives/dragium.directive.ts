@@ -51,8 +51,8 @@ export class DragiumDirective {
 
         this.ondrag.emit({
             isDragging : this._isDragging,
-            pageX : event.pageX,
-            pageY : event.pageY 
+            positionX : this.positionX,
+            positionY : this.positionY 
         });
 
         this.startX = event.clientX;
@@ -74,8 +74,8 @@ export class DragiumDirective {
     this._isDragging = false;     
     this.ondrag.emit({
       isDragging : this._isDragging ,
-      pageX : event.pageX,
-      pageY : event.pageY 
+      positionX : this.positionX,
+      positionY : this.positionY 
   });   
   }
 
@@ -88,13 +88,6 @@ export class DragiumDirective {
   onMouseMove(event:MouseEvent)
   {    
     if (this._isDragging){ 
-      this.ondrag.emit({
-          isDragging : true,
-          pageX : event.pageX,
-          pageY : event.pageY 
-      });
-
-
       let diffX = event.clientX - this.startX;
       let diffY = event.clientY - this.startY;     
 
@@ -107,6 +100,12 @@ export class DragiumDirective {
       
       if (this.dragDirection == 'horizontal' || this.dragDirection == 'both') this.positionX += Number(diffX); 
       if (this.dragDirection == 'vertical' || this.dragDirection == 'both') this.positionY += Number(diffY);
+
+      this.ondrag.emit({
+        isDragging : true,
+        positionX : this.positionX,
+        positionY : this.positionY 
+     });
 
  
       this.el.nativeElement.setAttribute('style',`touch-action:none;

@@ -1,5 +1,5 @@
 export interface dragEvent{
     isDragging:Boolean,
-    pageX:number,
-    pageY:number
+    positionX:number,
+    positionY:number
 }

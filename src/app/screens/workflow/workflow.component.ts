@@ -17,6 +17,8 @@ export class WorkflowComponent {
   
 
   drag(event:dragEvent){
+    this.flowElements[0].positionX = event.positionX;
+    this.flowElements[0].positionY = event.positionY;
     console.log(event);
   }
 
