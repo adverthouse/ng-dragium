@@ -1,0 +1,37 @@
+<div class="page-content-container">
+    <div class="page-content">
+        <div class="row">                        
+            <div class="col-md-12 block-ui-main" style="overflow-x:scroll;" id="board">
+                <div appDropium class="row sortableOptionsListsList u-fancy-scrollbar" [ngStyle]="{'width': (350*(kanbanLists.length+1)).toString()+'px' }">
+                    <div appDragium class="col-xs-12 col-sm-3 col-md-3 slBig" data-id="{{kanbanList.ListId}}" *ngFor="let kanbanList of kanbanLists">
+                        <h3 class="myHandle">
+                            <span id="ListTitle_{{kanbanList.ListId}}">{{kanbanList.ListName}}</span>
+                        </h3>
+                        <ul appDropium  class="CardsList apps-container sortableOptionsLists" data-id="{{kanbanList.ListId}}" id="CardList_{{kanbanList.ListId}}">                    
+                                <li appDragium class="app appItem" data-id="{{card.CardId}}" id="Card_{{card.CardId}}" *ngFor="let card of kanbanList.Cards">
+                                    <p>{{card.CardSummary}}</p>
+                                    <div class="row">
+                                        <div class="col-md-12 bt-1 pt-5" id="StuffesForCard_{{card.CardId}}">
+                                                <!--  <img src="/UserImages/stuff.jpg" class="Img20 mr-5 img-circle pull-right">-->                                    
+                                        </div>
+                                    </div>
+                                </li>
+                        </ul>
+                        <button class="btn btn-block btn-primary AddCard" data-id="{{kanbanList.ListId}}">Add...</button>
+                    </div>        
+                    <div appDropium class="col-xs-12 col-sm-2 col-md-2 slBig">
+                        <button type="button" class="btn btn-block btn-success" id="AddList">
+                            <span class="pull-left">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            <span>Add..</span>
+                        </button>
+                    </div>
+                </div>  
+            </div> 
+
+
+
+        </div>
+    </div>  
+</div> 

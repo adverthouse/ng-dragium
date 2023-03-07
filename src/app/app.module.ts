@@ -13,6 +13,9 @@ import { DropiumDirective } from './directives/dropium.directive';
 import { BasicListComponent } from './screens/basic-list/basic-list.component';
 import { ConnectedListComponent } from './screens/connected-list/connected-list.component';
 import { WorkflowComponent } from './screens/workflow/workflow.component';
+import { KanbanComponent } from './screens/kanban/kanban.component';
+import { DragiumPlaceholderDirective } from './directives/dragium-placeholder.directive';
+import { ItemConnectionComponent } from './screens/workflow/components/item-connection/item-connection.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { WorkflowComponent } from './screens/workflow/workflow.component';
     DropiumDirective,
     BasicListComponent,
     ConnectedListComponent,
-    WorkflowComponent
+    WorkflowComponent,
+    KanbanComponent,
+    DragiumPlaceholderDirective,
+    ItemConnectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div appDropium returnInitialPosition="false" id="WorkflowContainer">
+<div appDropium  id="WorkflowContainer">
     <div class="toolbox">
         <button class="btn btn-default" (click)="zoomIn()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 60 60">
@@ -19,7 +19,7 @@
 
     <div [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 50px)','width':'100%' }">
 
-        <div class="item" appDragium positionX="150" positionY="60">
+        <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="60">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120" style="position:relative;z-index:1200;">
                 <g id="start" transform="translate(-936 -569)">
                 <circle id="Ellipse_1" data-name="Ellipse 1" cx="60" cy="60" r="60" transform="translate(936 569)" fill="#2055bb"/>
@@ -34,11 +34,9 @@
             </svg>    
         </div>
  
-        <svg class="connection">
-            <path class="main-path" [attr.d]="get(100,5,150,260)"></path>
-        </svg>
-        
-            <div class="item" appDragium positionX="150" positionY="160">
+        <app-item-connection></app-item-connection>
+ 
+            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="160">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 169.706 169.706">
                     <g id="decision" transform="translate(-1444.147 -336.147)">
                     <rect id="Rectangle_3" data-name="Rectangle 3" width="120" height="120" rx="4" transform="translate(1529 336.147) rotate(45)" fill="#f0821d"/>
@@ -49,7 +47,7 @@
                 </svg>          
             </div>
 
-            <div class="item" appDragium positionX="150" positionY="260">
+            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="260">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
                     <g id="screen" transform="translate(-1466 -809)">
                     <rect id="Rectangle_4" data-name="Rectangle 4" width="120" height="120" rx="12" transform="translate(1466 809)" fill="#2055bb"/>
@@ -65,7 +63,7 @@
                 
             </div>
 
-            <div class="item" appDragium positionX="150" positionY="360">
+            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="360">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
                     <g id="Group_1" data-name="Group 1" transform="translate(-1969 -1197)">
                     <rect id="Rectangle_11" data-name="Rectangle 11" width="120" height="120" rx="12" transform="translate(1969 1197)" fill="#f0821d"/>
@@ -76,7 +74,7 @@
                 
             </div>
 
-            <div class="item" appDragium positionX="150" positionY="460">
+            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="460">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
                     <g id="stop" transform="translate(-1455 -1644)">
                     <circle id="Ellipse_2" data-name="Ellipse 2" cx="60" cy="60" r="60" transform="translate(1455 1644)" fill="#c63434"/>

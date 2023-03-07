@@ -1,0 +1,310 @@
+.page-content-container {
+    width: 100%;
+    float: left !important;
+  }
+
+
+
+  .list {
+      list-style: none outside none;
+      margin: 10px 0 30px;
+  }
+  
+   
+  .ui-state-highlight {
+    border: 1px solid #999;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    width:227px;
+    height:400px;
+    float:left;
+    background-color:#ccc;
+    -webkit-box-shadow: inset 0px 0px 13px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 13px -5px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 13px -5px rgba(0,0,0,0.75);
+  }
+  .ui-sortable-helper {
+      box-shadow: none;
+      -webkit-transform: rotate(4deg);
+      transform: rotate(4deg);
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+      cursor: grabbing;
+  }
+  
+  .app { 
+      padding: 5px 15px;
+      margin: 4px 0;
+      border: 1px solid #999;
+      border-radius: 5px; 
+      background-color:#444;
+      cursor: move;
+      min-height:50px;
+     -webkit-box-shadow: 0px 6px 1px -5px rgba(153,151,153,1);
+      -moz-box-shadow: 0px 6px 1px -5px rgba(153,151,153,1);
+      box-shadow: 0px 6px 1px -5px rgba(153,151,153,1);
+  }
+  .appItem {
+    background-color:#fff !important;
+  }
+  
+  .slBig {
+    border: 1px solid #000;
+    margin: 5px;
+    padding:10px; 
+    border-radius:5px;
+    background-color:#eaeaea;
+    width:250px;
+  }
+  /***  Extra ***/
+   
+  
+  .myHandle { 
+    padding:0;   
+    margin:0;
+    color:#000;
+    cursor: move;
+  }
+  .myHandle i {
+      font-size:18px;
+  }
+  .CardsList {
+     margin:0;
+     padding:0;
+     min-height:30px;
+  }
+      li {
+         list-style:none;
+      }
+  
+  .Img20 {
+    width: 20px; 
+    vertical-align: middle;
+  }
+  
+  .modal-backdrop {
+    height:100%;
+  }
+  
+  .tag-template .left-panel {
+    float: left;
+  }
+  
+  .tag-template .left-panel img {
+    width: 20px; 
+    vertical-align: middle;
+  }
+  
+  .tag-template .right-panel {
+    float: left;
+    margin-left: 5px;
+  }
+  
+  .autocomplete-template .left-panel {
+    float: left;
+  }
+  
+  .autocomplete-template .left-panel img {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+  }
+  
+  .autocomplete-template .right-panel {
+    float: left;
+    margin-left: 5px;
+    margin-top: 7px;
+  }
+  
+  .autocomplete-template .right-panel span:first-child {
+    font-size: 16px;
+  }
+  
+  .autocomplete-template .right-panel span:nth-child(2) {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .autocomplete-template .right-panel span:last-child {
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+  }
+  
+  
+  
+  ul.comments {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+  
+  ul.comments li {
+      clear: both;
+      padding: 10px 0 0 115px;
+  }
+  
+  ul.comments li img.avatar {
+      height: 80px;
+      width: 80px;
+  }
+  
+  ul.comments li ul.reply {
+      margin: 0;
+  }
+  
+  ul.comments li a {
+      text-decoration: none;
+  }
+  
+  ul.comments li .img-thumbnail {
+      margin-left: -115px;
+      position: absolute;
+  }
+  
+  ul.comments li .comment {
+      margin-bottom: 10px;
+  }
+  
+  ul.comments .comment-arrow {
+      border-bottom: 15px solid transparent;
+      border-right: 15px solid #F4F4F4;
+      border-top: 15px solid transparent;
+      height: 0;
+      left: -15px;
+      position: absolute;
+      top: 28px;
+      width: 0;
+  }
+  
+  ul.comments .comment-block {
+      background: #F4F4F4;
+      border-radius: 5px;
+      padding: 20px 20px 30px;
+      position: relative;
+  }
+  
+  ul.comments .comment-block p {
+      font-size: 0.9em;
+      line-height: 21px;
+      margin: 0;
+      padding: 0;
+  }
+  
+  ul.comments .comment-block .comment-by {
+      display: block;
+      font-size: 1em;
+      line-height: 21px;
+      margin: 0;
+      padding: 0 0 5px 0;
+  }
+  
+  ul.comments .comment-block .date {
+      color: #999;
+      font-size: 0.9em;
+  }
+  
+  
+  .modal-backdrop.in {
+     position:fixed;
+  }
+  
+  
+  /* test*/
+  
+  .pop-over,
+  .u-fancy-scrollbar {
+      -webkit-transform: translate3d(0, 0, 0)
+  }
+  
+  
+  .u-fancy-scrollbar {
+      -webkit-overflow-scrolling: touch
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar {
+      height: 9px;
+      width: 9px
+  }
+  
+  
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-button:end:increment,
+  .u-fancy-scrollbar::-webkit-scrollbar-button:start:decrement {
+      background: 0 0;
+      display: none
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-track-piece {
+      background: #d6dadc
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
+      border-radius: 5px 5px 0 0
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:end {
+      border-radius: 0 0 5px 5px
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:start {
+      border-radius: 5px 0 0 5px
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:end {
+      border-radius: 0 5px 5px 0
+  }
+  
+  .u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal,
+  .u-fancy-scrollbar::-webkit-scrollbar-thumb:vertical {
+      background: #c4c9cc;
+      border-radius: 5px;
+      display: block;
+      height: 50px
+  }
+  
+  
+  #board {
+      user-select: none;
+      white-space: nowrap;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 320px
+  }
+  
+  #board::-webkit-scrollbar {
+      height: 13px;
+      width: 13px
+  }
+  
+  #board::-webkit-scrollbar-thumb:horizontal,
+  #board::-webkit-scrollbar-thumb:vertical {
+      background: rgba(255, 255, 255, .4)
+  }
+  
+  #board::-webkit-scrollbar-track-piece {
+      background: rgba(0, 0, 0, .15)
+  }
+  
+  #board::-webkit-scrollbar-button {
+      display: block;
+      height: 5px;
+      width: 5px
+  }
+  
+  
+  
+  @media only screen and (max-width:750px) {
+          .u-fancy-scrollbar {
+          -webkit-overflow-scrolling: initial
+      }
+  
+  
+  }

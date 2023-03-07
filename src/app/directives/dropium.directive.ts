@@ -20,13 +20,10 @@ export class DropiumDirective {
   @Input()
   connectedTo:DropiumDirective; 
 
-  @Input()
-  returnInitialPosition?:boolean = true;
-
   @ContentChildren(DragiumDirective) draggableElements = new QueryList<DragiumDirective>();
 
-  private newIndex?:number;
-  private previousIndex?:number;
+  private newIndex?:number = -1;
+  private previousIndex?:number = -1;
 
   public previousContainer:DropiumDirective;
   public container:DropiumDirective;
@@ -40,17 +37,13 @@ export class DropiumDirective {
      this.Element = el.nativeElement; 
      this.previousContainer = this;
      this.container = this;    
-     this.draggableElements.forEach(dragInstance => {
-        dragInstance.returnInitialPosition = this.returnInitialPosition && true;
-     }); 
   }
 
   ngAfterContentInit() {
 
     this.draggableElements.forEach(dragInstance => { 
 
-        if (!this.returnInitialPosition) return;
-        
+
         dragInstance.dragging.subscribe((isDragging)=> {            
           if (isDragging){
 
@@ -83,7 +76,7 @@ export class DropiumDirective {
                                    a.Element.getBoundingClientRect().top >
                                     dragInstanceClientrect.top);
          
-                 this.newIndex = this.draggableElements.toArray()
+               this.newIndex = this.draggableElements.toArray()
                                      .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
                                      .indexOf(item);
 
@@ -105,12 +98,12 @@ export class DropiumDirective {
   onMouseDown(event:MouseEvent)
   {        
       event.preventDefault();   
+      this.previousIndex = -1;
+      this.newIndex = -1;
   } 
 
   @HostListener('mouseup',['$event']) 
-  onMouseUp(event:MouseEvent) {       
-      
-       
+  onMouseUp(event:MouseEvent) {    
        this.dropped.emit({
           previousContainer: this.previousContainer,
           container :this.container, 
@@ -122,6 +115,8 @@ export class DropiumDirective {
   @HostListener('window:mousemove',['$event'])
   onMouseMove(event:MouseEvent)
   {
-    
+    if (this.previousIndex != this.newIndex){
+      console.log(this.previousIndex+"."+this.newIndex);
+    }
   }
 }

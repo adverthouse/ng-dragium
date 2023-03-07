@@ -1,4 +1,5 @@
-import { Directive , ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ContentChild, Directive , ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { DragiumPlaceholderDirective, DRAGIUM_PLACEHOLDER } from './dragium-placeholder.directive';
 
 
 @Directive({
@@ -10,23 +11,26 @@ export class DragiumDirective {
   public dragging = new EventEmitter<Boolean>();
   private _isDragging:Boolean = false;
 
-  @Input() returnInitialPosition:boolean = false;
+  @Input() returnInitialPosition:boolean = true;
   @Input() target:string = '';
   @Input() dragDirection:string = 'both';
   @Input() positionX:number = 0;
   @Input() positionY:number = 0; 
   @Input() isSelected:boolean = false;
+  @Input() showPlaceholder:boolean = false;
   @Input() Id:any;
 
   private startX:number = 0;
   private startY:number = 0;
 
   public Element:any;
+
   constructor(private el: ElementRef) {        
-    this.Element = this.el.nativeElement;
+    this.Element = this.el.nativeElement;        
   }
 
-  ngOnInit(){      
+  ngOnInit(){        
+
     if (this.positionX != 0 || this.positionY != 0 )   
     {  
       this.startX = this.positionX;
