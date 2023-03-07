@@ -7,29 +7,25 @@ import { Component, Input } from '@angular/core';
 })
 export class ItemConnectionComponent {
 
-  @Input() x1:number;
-  @Input() x2:number;
-  @Input() y1:number;
-  @Input() y2:number;
+  @Input() x1:number = 0;
+  @Input() x2:number = 0;
+  @Input() y1:number = 0;
+  @Input() y2:number = 0;
+  
+  curveWH:number = 30
 
   width:number = 0;
   height:number = 0;
 
-  get(){
-    this.width = this.x2-this.x1;
-    this.height = this.y2-this.y1;
+  PathExpression()
+  {   
+      this.width = this.x2-this.x1;
+      this.height = this.y2-this.y1;
 
-    const curveWH:number = 30
+      let p1y = ((this.height / 2 ) - this.curveWH);
+      let p2y = (this.height / 2 ); 
+      let p3x = (this.width - this.curveWH); 
 
-    let p1x = this.x1;
-    let p1y:number = this.y1 + (((this.y2-this.y1) /2) + curveWH)
-
-    let p2x = ((this.x2-this.x1) - curveWH*2);
-    let p2y = (this.y2-this.y1) / 2
-
-
-    return `M ${this.x1} ${this.y1} L ${p1x} ${p1y}  Q${p1x} ${p1y + curveWH},${p1x + curveWH } ${p1y + curveWH}  L ${p2x} ${p2y}`;
-  }
-
-
+     return `M 2 2 L 2 ${p1y} Q 2 ${p1y + this.curveWH},${this.curveWH} ${p2y}  L ${p3x} ${p2y} Q ${this.width} ${p2y},${this.width} ${p2y + this.curveWH } L ${this.width} ${this.height}`;
+  } 
 }

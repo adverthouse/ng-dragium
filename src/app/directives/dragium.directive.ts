@@ -1,5 +1,6 @@
 import { ContentChild, Directive , ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { DragiumPlaceholderDirective, DRAGIUM_PLACEHOLDER } from './dragium-placeholder.directive';
+import { dragEvent } from './events/drag-events';
 
 
 @Directive({
@@ -8,7 +9,7 @@ import { DragiumPlaceholderDirective, DRAGIUM_PLACEHOLDER } from './dragium-plac
 export class DragiumDirective {
 
   @Output() 
-  public dragging = new EventEmitter<Boolean>();
+  public ondrag = new EventEmitter<dragEvent>();
   private _isDragging:Boolean = false;
 
   @Input() returnInitialPosition:boolean = true;
@@ -47,7 +48,12 @@ export class DragiumDirective {
 
       if (!this._isDragging) {
         this._isDragging = true; 
-        this.dragging.emit(true);
+
+        this.ondrag.emit({
+            isDragging : this._isDragging,
+            pageX : event.pageX,
+            pageY : event.pageY 
+        });
 
         this.startX = event.clientX;
         this.startY = event.clientY; 
@@ -60,13 +66,17 @@ export class DragiumDirective {
       }      
   }
 
-  @HostListener('window:mouseup') 
-  onMouseUp() {  
+  @HostListener('window:mouseup',['$event']) 
+  onMouseUp(event:MouseEvent) {  
     if (this.returnInitialPosition)
           this.el.nativeElement.setAttribute('style',"");  
      
     this._isDragging = false;     
-    this.dragging.emit(false);      
+    this.ondrag.emit({
+      isDragging : this._isDragging ,
+      pageX : event.pageX,
+      pageY : event.pageY 
+  });   
   }
 
   @HostListener("click")
@@ -76,9 +86,13 @@ export class DragiumDirective {
 
   @HostListener('window:mousemove',['$event'])
   onMouseMove(event:MouseEvent)
-  {
+  {    
     if (this._isDragging){ 
-      this.dragging.emit(true);
+      this.ondrag.emit({
+          isDragging : true,
+          pageX : event.pageX,
+          pageY : event.pageY 
+      });
 
 
       let diffX = event.clientX - this.startX;

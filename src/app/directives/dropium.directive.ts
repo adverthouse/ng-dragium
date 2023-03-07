@@ -41,11 +41,10 @@ export class DropiumDirective {
 
   ngAfterContentInit() {
 
-    this.draggableElements.forEach(dragInstance => { 
+    this.draggableElements.forEach(dragInstance => {  
 
-
-        dragInstance.dragging.subscribe((isDragging)=> {            
-          if (isDragging){
+        dragInstance.ondrag.subscribe((dragEvent)=> {            
+          if (dragEvent.isDragging){
 
             const dragInstanceClientrect =  dragInstance.Element.getBoundingClientRect();
 
