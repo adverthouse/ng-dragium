@@ -116,12 +116,15 @@ export class DropiumDirective {
   onMouseMove(event:MouseEvent)
   {   
     const itemNew = this.draggableElements.toArray()[this.newIndex];      
-    if (this.previousIndex != this.newIndex){
-      const itemPrevious = this.draggableElements.toArray()[this.previousIndex];      
-      this.renderer.removeStyle(itemPrevious.placeHolder?.elementRef?.nativeElement,"display");
-    } else {      
-      this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"display","block");
-      this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"transform","translate3d(0px,0px,0px)");
+    if (itemNew.placeHolder)
+    {
+        if (this.previousIndex != this.newIndex){
+          const itemPrevious = this.draggableElements.toArray()[this.previousIndex];      
+          this.renderer.removeStyle(itemPrevious.placeHolder?.elementRef?.nativeElement,"display");
+        } else {      
+          this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"display","block");
+          this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"transform","translate3d(0px,0px,0px)");
+        }
     }
   }
 }
