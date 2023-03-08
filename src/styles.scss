@@ -96,6 +96,7 @@ div.box {
     background-color: #fafafa;
 }
 
-.dragging {
-    transform: rotate(-4deg)
+
+[appDragiumPlaceholder] {
+  display: none;
 }

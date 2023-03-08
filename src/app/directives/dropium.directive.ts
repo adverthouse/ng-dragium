@@ -20,6 +20,9 @@ export class DropiumDirective {
   @Input()
   connectedTo:DropiumDirective; 
 
+  @Input()
+  data:any;
+
   @ContentChildren(DragiumDirective) draggableElements = new QueryList<DragiumDirective>();
 
   private newIndex?:number = -1;
@@ -43,47 +46,44 @@ export class DropiumDirective {
 
     this.draggableElements.forEach(dragInstance => {  
 
-        dragInstance.ondrag.subscribe((dragEvent)=> {            
-          if (dragEvent.isDragging){
-
-            const dragInstanceClientrect =  dragInstance.Element.getBoundingClientRect();
-
-            this.previousIndex = this.draggableElements.toArray().indexOf(dragInstance);
-        
-
-            if (this.connectedTo && 
-              isInsideClientRect(this.connectedTo.Element.getBoundingClientRect(),
-              dragInstanceClientrect.left,dragInstanceClientrect.top))
-               // todo on it is enough
-            { 
-               this.container = this.connectedTo
-
-               const item = this.connectedTo.draggableElements.toArray()
-                                .find(a=> a.Element.getBoundingClientRect().top > dragInstanceClientrect.top);
-
-               this.newIndex = this.connectedTo.draggableElements.toArray()
-                                   .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
-                                   .indexOf(item)
-
-              this.newIndex = this.newIndex == -1 ? this.connectedTo.draggableElements.length  : this.newIndex;             
-
-            } else {
-               this.container = this;
-
-               const item = this.draggableElements.toArray()
-                                .find(a=>
-                                   a.Element.getBoundingClientRect().top >
-                                    dragInstanceClientrect.top);
+        dragInstance.ondrag.subscribe((dragEvent)=> {    
          
-               this.newIndex = this.draggableElements.toArray()
-                                     .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
-                                     .indexOf(item);
 
-               this.newIndex = this.newIndex == -1 ? this.draggableElements.length : this.newIndex;         
-            } 
+          if (dragEvent.isDragging){
+                  
 
-           
+                    const dragInstanceClientrect = dragInstance.Element.getBoundingClientRect();
 
+                    this.previousIndex = this.draggableElements.toArray().indexOf(dragInstance);
+
+                    if (this.connectedTo &&  isInsideClientRect(this.connectedTo.Element.getBoundingClientRect(), dragInstanceClientrect.left,dragInstanceClientrect.top))
+                    { 
+                      this.container = this.connectedTo
+
+                      const item = this.connectedTo.draggableElements.toArray()
+                                        .find(a=> a.Element.getBoundingClientRect().top > dragInstanceClientrect.top);
+
+                      this.newIndex = this.connectedTo.draggableElements.toArray()
+                                          .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
+                                          .indexOf(item)
+
+                      this.newIndex = this.newIndex == -1 ? this.connectedTo.draggableElements.length  : this.newIndex;             
+
+                    } else {
+                      this.container = this;
+
+                      const item = this.draggableElements.toArray().find(item => item == dragInstance);
+
+                      this.newIndex = this.draggableElements.toArray()
+                                            .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
+                                            .indexOf(item);       
+                    }           
+
+                    if (dragInstance.placeHolder){  
+                       console.log(dragInstance.placeHolder);
+                    }
+
+                    console.log(this.previousContainer.id+"-"+this.previousIndex+" -> "+this.container.id+"-"+this.newIndex);
 
           }
         });
@@ -104,6 +104,7 @@ export class DropiumDirective {
   @HostListener('mouseup',['$event']) 
   onMouseUp(event:MouseEvent) {    
        this.dropped.emit({
+          data: this.data,
           previousContainer: this.previousContainer,
           container :this.container, 
           previousIndex : this.previousIndex,
@@ -113,9 +114,14 @@ export class DropiumDirective {
 
   @HostListener('window:mousemove',['$event'])
   onMouseMove(event:MouseEvent)
-  {
+  {   
+    const itemNew = this.draggableElements.toArray()[this.newIndex];      
     if (this.previousIndex != this.newIndex){
-      console.log(this.previousIndex+"."+this.newIndex);
+      const itemPrevious = this.draggableElements.toArray()[this.previousIndex];      
+      this.renderer.removeStyle(itemPrevious.placeHolder?.elementRef?.nativeElement,"display");
+    } else {      
+      this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"display","block");
+      this.renderer.setStyle(itemNew.placeHolder?.elementRef?.nativeElement,"transform","translate3d(0px,0px,0px)");
     }
   }
 }

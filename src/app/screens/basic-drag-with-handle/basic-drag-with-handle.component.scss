@@ -1,0 +1,16 @@
+.dragging{    
+
+    .box {
+       border:1px solid rebeccapurple;    
+       transform: rotate(-4deg);    
+    }
+}
+
+.example-handle {
+    position: relative;    
+    display: block;
+    left: 0;
+    top: 0;
+}
+
+

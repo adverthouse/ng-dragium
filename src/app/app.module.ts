@@ -14,8 +14,10 @@ import { BasicListComponent } from './screens/basic-list/basic-list.component';
 import { ConnectedListComponent } from './screens/connected-list/connected-list.component';
 import { WorkflowComponent } from './screens/workflow/workflow.component';
 import { KanbanComponent } from './screens/kanban/kanban.component';
-import { DragiumPlaceholderDirective } from './directives/dragium-placeholder.directive';
 import { ItemConnectionComponent } from './screens/workflow/components/item-connection/item-connection.component';
+import { DragiumHandleDirective } from './directives/dragium-handle.directive';
+import { BasicDragWithHandleComponent } from './screens/basic-drag-with-handle/basic-drag-with-handle.component';
+import { DragiumPlaceholderDirective } from './directives/dragium-placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { ItemConnectionComponent } from './screens/workflow/components/item-conn
     ConnectedListComponent,
     WorkflowComponent,
     KanbanComponent,
+    ItemConnectionComponent,
+    DragiumHandleDirective,
     DragiumPlaceholderDirective,
-    ItemConnectionComponent
+    BasicDragWithHandleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule   
+    ReactiveFormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]

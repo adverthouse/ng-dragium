@@ -19,9 +19,9 @@ export class ConnectedListComponent implements OnInit {
 
   dropped(event:dropEvent){    
     if (event.previousContainer === event.container){
-      moveItemInArray(this.itemsSource,event.previousIndex,event.newIndex);     
+      moveItemInArray(event.data,event.previousIndex,event.newIndex);     
     } else {
-      transferArrayItem(this.itemsSource,this.itemsTarget,event.previousIndex,event.newIndex);
+      transferArrayItem(event.previousContainer.data,event.container.data,event.previousIndex,event.newIndex);
     }
   }
 
