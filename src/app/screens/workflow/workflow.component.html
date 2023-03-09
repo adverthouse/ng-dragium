@@ -17,7 +17,7 @@
         </button>
     </div>
 
-    <div [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 50px)','width':'100%' }">
+    <div id="WorkflowCanvas" [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 50px)','width':'100%' }">
 
         <div *ngFor="let flowElement of flowElements">
             <div [ngSwitch]="flowElement.type">
