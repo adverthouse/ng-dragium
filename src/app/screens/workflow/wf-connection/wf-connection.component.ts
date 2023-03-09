@@ -12,10 +12,10 @@ export class WfConnectionComponent {
   @Input() connection?:connection;
   @Input() flowElements?:FlowElement[];
     
-  width:number = 0;
-  height:number = 0;
-  positionX:number = 0;
-  positionY:number = 0;
+  width?:number;
+  height?:number;
+  positionX?:number;
+  positionY?:number;
 
   pathExpression()
   {
