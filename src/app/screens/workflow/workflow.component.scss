@@ -1,12 +1,8 @@
 #WorkflowContainer{
-    border:1px solid #ccc;
+   
     height: 100%;
     overflow: hidden;
-        
-    background-image: radial-gradient(rgb(214, 212, 212) 1px, transparent 0);
-    background-color:#f3f2f2 !important;
-    background-size: 10px 10px;
-    background-position: -19px -19px;
+
 
     .item {
         width: 60px;
@@ -18,10 +14,17 @@
 .toolbox {
     position:absolute;
     right: 20px;
-    bottom:20px;;
+    bottom:20px;
+    z-index: 10000;
 }
 
-
+#WorkflowCanvas {
+    border:1px solid #ccc;
+    background-image: radial-gradient(rgb(214, 212, 212) 1px, transparent 0);
+    background-color:#f3f2f2 !important;
+    background-size: 10px 10px;
+    background-position: -19px -19px;
+}
 
 
 
