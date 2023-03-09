@@ -37,7 +37,6 @@ export class WfConnectionComponent {
     let p2x = end.positionX - start.positionX; 
     let p2y = end.positionY - start.positionY; 
     
-    return `M ${p1x} ${p1y} L ${p2x} ${p2y}`
-    //return `M ${elementCenter} 2 L ${elementCenter} ${p1y} Q ${elementCenter} ${p1y + curveWH   },${curveWH + elementCenter} ${p2y}  L ${p3x} ${p2y} Q ${this.width} ${p2y},${this.width} ${p2y + curveWH } L ${this.width} ${this.height}`;     
+    return `M ${p1x} ${p1y} L ${p2x} ${p2y}`    
    }
 }
