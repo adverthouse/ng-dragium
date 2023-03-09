@@ -14,10 +14,16 @@ import { BasicListComponent } from './screens/basic-list/basic-list.component';
 import { ConnectedListComponent } from './screens/connected-list/connected-list.component';
 import { WorkflowComponent } from './screens/workflow/workflow.component';
 import { KanbanComponent } from './screens/kanban/kanban.component';
-import { ItemConnectionComponent } from './screens/workflow/components/item-connection/item-connection.component';
+
 import { DragiumHandleDirective } from './directives/dragium-handle.directive';
 import { BasicDragWithHandleComponent } from './screens/basic-drag-with-handle/basic-drag-with-handle.component';
-import { DragiumPlaceholderDirective } from './directives/dragium-placeholder.directive';
+import { WfStartComponent } from './screens/workflow/wf-start/wf-start.component';
+import { WfEndComponent } from './screens/workflow/wf-end/wf-end.component';
+import { WfScreenComponent } from './screens/workflow/wf-decision/wf-decision.component';
+import { WfDecisionComponent } from './screens/workflow/wf-screen/wf-screen.component';
+import { WfAssignmentComponent } from './screens/workflow/wf-assignment/wf-assignment.component';
+import { WfConnectionComponent } from './screens/workflow/wf-connection/wf-connection.component';
+
 
 @NgModule({
   declarations: [
@@ -31,10 +37,14 @@ import { DragiumPlaceholderDirective } from './directives/dragium-placeholder.di
     ConnectedListComponent,
     WorkflowComponent,
     KanbanComponent,
-    ItemConnectionComponent,
     DragiumHandleDirective,
-    DragiumPlaceholderDirective,
-    BasicDragWithHandleComponent
+    BasicDragWithHandleComponent,
+    WfStartComponent,
+    WfEndComponent,
+    WfScreenComponent,
+    WfDecisionComponent,
+    WfAssignmentComponent,
+    WfConnectionComponent
   ],
   imports: [
     BrowserModule,

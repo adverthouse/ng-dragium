@@ -1,8 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ContentChild, Directive , ElementRef, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ContentChild, Directive , ElementRef, EventEmitter, HostListener, Inject, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { isInsideClientRect } from './core/dragium-utils';
 import { DragiumHandleDirective } from './dragium-handle.directive'; 
-import { DragiumPlaceholderDirective } from './dragium-placeholder.directive'; 
 import { dragEvent } from './events/drag-events';
 
 
@@ -12,8 +11,6 @@ import { dragEvent } from './events/drag-events';
 export class DragiumDirective implements AfterViewInit {
 
   @ContentChild(DragiumHandleDirective) handle?: DragiumHandleDirective;
-  @ContentChild(DragiumPlaceholderDirective) placeHolder?: DragiumPlaceholderDirective;
-
 
   @Output() 
   public ondrag = new EventEmitter<dragEvent>();
@@ -33,12 +30,15 @@ export class DragiumDirective implements AfterViewInit {
   private _startY:number = 0;
 
 
+  private _width:any;
+  private _height:any;
+
   public Element:any;
   
   private _handleElement?: HTMLElement;
   private _draggingBoundaryElement?:any;
 
-  constructor(@Inject(DOCUMENT) private document:any, private elementRef: ElementRef) {        
+  constructor(@Inject(DOCUMENT) private document:any, private elementRef: ElementRef, private renderer:Renderer2) {        
     this.Element = this.elementRef.nativeElement as HTMLElement;      
   }
 
@@ -47,14 +47,25 @@ export class DragiumDirective implements AfterViewInit {
        this._draggingBoundaryElement = (this.document as Document).querySelector(this.boundary);
     }
 
- 
-
     this._handleElement = this.handle?.elementRef?.nativeElement || this.Element;
 
     this._startX = this.positionX;
     this._startY = this.positionY;
 
-    this.elementRef.nativeElement.setAttribute('style',`transform: translate3d(${this.positionX}px,${this.positionY}px,0px)`);
+    this._width = this.Element.getBoundingClientRect().width;
+    this._height = this.Element.getBoundingClientRect().height;
+
+    this.Element.setAttribute('style',`transform: translate3d(${this.positionX}px,${this.positionY}px,0px);position:absolute;z-index:1024;`);
+  }
+
+  setStyle(initDiff:number){
+    this.Element.setAttribute('style',`touch-action:none;
+                                                        -webkit-user-drag: none;
+                                                        -webkit-tap-highlight-color:transparent;
+                                                        user-select: none; 
+                                                        z-index:1024;
+                                                        position:absolute;    
+                                                        transform: translate3d(${this.positionX}px,${this.positionY - initDiff}px,0px)`);
   }
 
   @HostListener('mousedown',['$event'])
@@ -72,14 +83,13 @@ export class DragiumDirective implements AfterViewInit {
         this._startY = event.clientY - this.positionY;
         
         this.Element.classList.add('dragging');
+        this.setStyle(0);
 
         this.ondrag.emit({
             isDragging : this._isDragging,
             positionX : this.positionX,
             positionY : this.positionY 
-        });
-
-      
+        });      
       }      
   }
 
@@ -130,21 +140,14 @@ export class DragiumDirective implements AfterViewInit {
 
       if (this.dragDirection == 'horizontal' || this.dragDirection == 'both') this.positionX = finalX; 
       if (this.dragDirection == 'vertical' || this.dragDirection == 'both') this.positionY = finalY;
+     
+      this.setStyle(0); 
 
       this.ondrag.emit({
         isDragging : true,
         positionX : this.positionX,
         positionY : this.positionY 
      });
-
- 
-      this.elementRef.nativeElement.setAttribute('style',`touch-action:none;
-        -webkit-user-drag: none;
-        -webkit-tap-highlight-color:transparent;
-        user-select: none; 
-        z-index:15000;
-        position:relative;
-        transform: translate3d(${this.positionX}px,${this.positionY}px,0px)`);
     }
   }
 }

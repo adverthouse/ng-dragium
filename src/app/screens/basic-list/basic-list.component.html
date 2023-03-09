@@ -1,6 +1,7 @@
-<ul appDropium (dropped)="dropped($event)"  returnInitialPosition="true">
-   <li appDragium *ngFor="let item of items">     
-      <div class="example-custom-placeholder" appDragiumPlaceholder></div> 
+<ul appDropium placeholder="true" (dropped)="dropped($event)" returnInitialPosition="true">
+   <li appDragium *ngFor="let item of items">                    
       {{item}}
    </li>   
 </ul>
+
+

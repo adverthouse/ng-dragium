@@ -21,78 +21,27 @@
 
         <div *ngFor="let flowElement of flowElements">
             <div [ngSwitch]="flowElement.type">
-                <div *ngSwitchCase="'start'">
-                    <div class="item" appDragium (ondrag)="drag($event)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120" style="position:relative;z-index:1200;">
-                            <g id="start" transform="translate(-936 -569)">
-                            <circle id="Ellipse_1" data-name="Ellipse 1" cx="60" cy="60" r="60" transform="translate(936 569)" fill="#2055bb"/>
-                            <path id="Polygon_1" data-name="Polygon 1" d="M26,0,52,31H0Z" transform="translate(1011.5 603) rotate(90)" fill="#fff"/>
-                            </g>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 56 56" style="position: relative;top:-10px;left:20px;z-index:900;">
-                            <g id="Ellipse_4" data-name="Ellipse 4" fill="#fff" stroke="#dcdcdc" stroke-width="2">
-                                <circle cx="28" cy="28" r="28" stroke="none"/>
-                                <circle cx="28" cy="28" r="27" fill="none"/>
-                            </g>
-                        </svg>    
-                    </div>            
+                <div *ngSwitchCase="'start'">                    
+                    <wf-start appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-start>                    
                 </div>
                 <div *ngSwitchCase="'connection'">
-                    <app-item-connection (ondrag)="drag($event)" [x1]="flowElements[0].positionX" [y1]="flowElements[0].positionY" x2="400" y2="425"></app-item-connection>
+                    <wf-connection [flowElements]="flowElements" [connection]="flowElement.connection"></wf-connection>
                 </div>
-                <div *ngSwitchDefault>output2</div>
+                <div *ngSwitchCase="'screen'">
+                    <wf-screen appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-screen>
+                </div>
+                <div *ngSwitchCase="'assignment'">
+                    <wf-assignment appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-assignment>
+                </div>
+                <div *ngSwitchCase="'decision'">
+                    <wf-decision appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-decision>
+                </div>
+                <div *ngSwitchCase="'end'">
+                    <wf-end appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-end>
+                </div>
             </div>
-        </div>
+        </div> 
 
-        
- 
-
- 
-            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="160">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 169.706 169.706">
-                    <g id="decision" transform="translate(-1444.147 -336.147)">
-                    <rect id="Rectangle_3" data-name="Rectangle 3" width="120" height="120" rx="4" transform="translate(1529 336.147) rotate(45)" fill="#f0821d"/>
-                    <path id="Path_1" data-name="Path 1" d="M3367.345,435.656h54.1v-13.77h-24.389v-5.049h-8.942V422.4h-22.227l-6.733,6.733Z" transform="translate(-1863.424 -5.308)" fill="#fff"/>
-                    <path id="Path_2" data-name="Path 2" d="M52.125,18.986,0,18.822V5.189l10.977-.016L20.01,5.16l3.262,0V.116L31.9.089V5.655l1.9,0,19.758-.025,6.622,6.793Z" transform="translate(1502.093 387.432)" fill="#fff"/>
-                    <path id="Path_3" data-name="Path 3" d="M3388.3,442.39h9.28V450.8l7.1,5.486v3.595h-24.011v-3.595l7.628-5.486Z" transform="translate(-1863.424 -5.308)" fill="#fff"/>
-                    </g>
-                </svg>          
-            </div>
-
-            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="260">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
-                    <g id="screen" transform="translate(-1466 -809)">
-                    <rect id="Rectangle_4" data-name="Rectangle 4" width="120" height="120" rx="12" transform="translate(1466 809)" fill="#2055bb"/>
-                    <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(1492.5 839)" fill="none" stroke="#fff" stroke-width="4">
-                        <rect width="67" height="49" rx="12" stroke="none"/>
-                        <rect x="2" y="2" width="63" height="45" rx="10" fill="none"/>
-                    </g>
-                    <rect id="Rectangle_6" data-name="Rectangle 6" width="34" height="6" rx="3" transform="translate(1509.5 855)" fill="#fff"/>
-                    <rect id="Rectangle_7" data-name="Rectangle 7" width="34" height="11" rx="4" transform="translate(1509.5 864)" fill="#fff"/>
-                    <path id="Path_4" data-name="Path 4" d="M3393.08,893.912h8.754v5.077h7.288l4.052,4.8v4.323h-30.746v-4.323l4.862-4.8h5.791v-5.563" transform="translate(-1871.5)" fill="#fff"/>
-                    </g>
-                </svg>
-                
-            </div>
-
-            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="360">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
-                    <g id="Group_1" data-name="Group 1" transform="translate(-1969 -1197)">
-                    <rect id="Rectangle_11" data-name="Rectangle 11" width="120" height="120" rx="12" transform="translate(1969 1197)" fill="#f0821d"/>
-                    <rect id="Rectangle_12" data-name="Rectangle 12" width="63" height="14" rx="7" transform="translate(1998 1239)" fill="#fff"/>
-                    <rect id="Rectangle_13" data-name="Rectangle 13" width="63" height="14" rx="7" transform="translate(1998 1261)" fill="#fff"/>
-                    </g>
-                </svg>
-                
-            </div>
-
-            <div class="item" appDragium [returnInitialPosition]="false" positionX="150" positionY="460">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 120 120">
-                    <g id="stop" transform="translate(-1455 -1644)">
-                    <circle id="Ellipse_2" data-name="Ellipse 2" cx="60" cy="60" r="60" transform="translate(1455 1644)" fill="#c63434"/>
-                    <rect id="Rectangle_2" data-name="Rectangle 2" width="57" height="55" transform="translate(1487 1677)" fill="#fff"/>
-                    </g>
-                </svg>          
-            </div>
+            
         </div>
 </div>
