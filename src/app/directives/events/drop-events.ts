@@ -5,5 +5,7 @@ export interface dropEvent{
     previousContainer:DropiumDirective,
     container:DropiumDirective,
     previousIndex: number,
-    newIndex: number
+    newIndex: number,
+    dropPositionX:number,
+    dropPositionY:number
 }

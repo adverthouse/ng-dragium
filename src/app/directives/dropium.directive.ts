@@ -30,6 +30,9 @@ export class DropiumDirective {
   public container:DropiumDirective;
   public Element:HTMLElement;
  
+  private draggingElementX:number = 0;
+  private draggingElementY:number = 0;
+
 
   @Input() id: string = `dropium-id-${_uniqueId++}`;
 
@@ -40,23 +43,21 @@ export class DropiumDirective {
      this.container = this;    
   }
 
-  ngAfterContentInit() {
-      
+  ngAfterContentInit() {    
 
-    
     this.draggableElements.forEach(dragInstance => {  
-
 
         dragInstance.ondrag.subscribe((dragEvent)=> {             
 
           if (dragEvent.isDragging)
-          {
+          { 
                     const dragInstanceClientrect = dragInstance.Element.getBoundingClientRect();
+
+                    this.draggingElementX = dragInstanceClientrect.x;
+                    this.draggingElementY = dragInstanceClientrect.y;
 
                     this.previousIndex = this.draggableElements.toArray().indexOf(dragInstance);
                     this.newIndex = this.previousIndex; 
-
-
 
                     if (this.connectedTo &&  isInsideClientRect(this.connectedTo.Element.getBoundingClientRect(), dragInstanceClientrect.left,dragInstanceClientrect.top))
                     { 
@@ -77,11 +78,8 @@ export class DropiumDirective {
                       this.newIndex = this.draggableElements.toArray()
                                             .sort((a,b) => a.Element.getBoundingClientRect().top - b.Element.getBoundingClientRect().top)
                                             .indexOf(item);       
-                    }           
-                
-   
-
-                   
+                    }   
+               
           } 
         });
     });
@@ -99,14 +97,16 @@ export class DropiumDirective {
   } 
 
   @HostListener('window:mouseup',['$event']) 
-  onMouseUp(event:MouseEvent) {        
+  onMouseUp(event:MouseEvent) {         
 
        this.dropped.emit({
           data: this.data,
           previousContainer: this.previousContainer,
           container :this.container, 
           previousIndex : this.previousIndex,
-          newIndex : this.newIndex
+          newIndex : this.newIndex,
+          dropPositionX: this.draggingElementX,
+          dropPositionY: this.draggingElementY
        });         
   }
 

@@ -1,9 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ContentChild, Directive , ElementRef, EventEmitter, HostListener, Inject, Input, Output, Renderer2, ViewChild } from '@angular/core';
+import { DragiumConsts } from './core/dragium-consts';
 import { isInsideClientRect } from './core/dragium-utils';
 import { DragiumHandleDirective } from './dragium-handle.directive'; 
 import { dragEvent } from './events/drag-events';
 
+let _uniqueId = 0;
 
 @Directive({
   selector: '[appDragium]'
@@ -15,23 +17,27 @@ export class DragiumDirective implements AfterViewInit {
   @Output() 
   public ondrag = new EventEmitter<dragEvent>();
   private _isDragging:Boolean = false;
+  private _isMoved:Boolean = false;
 
   @Input() returnInitialPosition:boolean = true;
   @Input() target:string = '';
   @Input() dragDirection:string = 'both';
   @Input() positionX:number = 0;
   @Input() positionY:number = 0; 
+
+  @Input() isSelectable:boolean = true;
   @Input() isSelected:boolean = false;
   @Input() showPlaceholder:boolean = false;
-  @Input() Id:any;
+  @Input() id: string = `dragium-id-${_uniqueId++}`;
   @Input() boundary?;
+  @Input() data:any;
 
   private _startX:number = 0;
   private _startY:number = 0;
 
 
   private _width:any;
-  private _height:any;
+  private _height:any;  
 
   public Element:any;
   
@@ -39,7 +45,8 @@ export class DragiumDirective implements AfterViewInit {
   private _draggingBoundaryElement?:any;
 
   constructor(@Inject(DOCUMENT) private document:any, private elementRef: ElementRef, private renderer:Renderer2) {        
-    this.Element = this.elementRef.nativeElement as HTMLElement;      
+    this.Element = this.elementRef.nativeElement as HTMLElement;   
+    this.renderer.setAttribute(this.Element,"id",this.id);   
   }
 
   ngAfterViewInit(){        
@@ -55,7 +62,9 @@ export class DragiumDirective implements AfterViewInit {
     this._width = this.Element.getBoundingClientRect().width;
     this._height = this.Element.getBoundingClientRect().height;
 
-    this.Element.setAttribute('style',`transform: translate3d(${this.positionX}px,${this.positionY}px,0px);position:absolute;z-index:1024;`);
+    if (this.positionX != 0 || this.positionY !=0){
+      this.Element.setAttribute('style',`transform: translate3d(${this.positionX}px,${this.positionY}px,0px);position:absolute;z-index:1024;`);
+    }
   }
 
   setStyle(initDiff:number){
@@ -68,25 +77,37 @@ export class DragiumDirective implements AfterViewInit {
                                                         transform: translate3d(${this.positionX}px,${this.positionY - initDiff}px,0px)`);
   }
 
+  setSelected(isSelected:boolean){
+    if (this.isSelectable){
+      this.isSelected = isSelected;
+      if (this.isSelected)
+          this.Element.classList.add(DragiumConsts.SELECTED);
+      else 
+          this.Element.classList.remove(DragiumConsts.SELECTED);
+     }
+  }
+
   @HostListener('mousedown',['$event'])
   onMouseDown(event:MouseEvent)
   {        
       event.preventDefault();   
+      this._isMoved = false;
 
       if (!isInsideClientRect(this._handleElement.getBoundingClientRect(), event.clientX,event.clientY)) return
 
       if (!this._isDragging) {
 
-        this._isDragging = true; 
+        this._isDragging = true;  
 
         this._startX = event.clientX - this.positionX;
         this._startY = event.clientY - this.positionY;
         
-        this.Element.classList.add('dragging');
+        this.Element.classList.add(DragiumConsts.DRAGGING);
         this.setStyle(0);
 
         this.ondrag.emit({
             isDragging : this._isDragging,
+            data: this.data,
             positionX : this.positionX,
             positionY : this.positionY 
         });      
@@ -95,36 +116,48 @@ export class DragiumDirective implements AfterViewInit {
 
   @HostListener('window:mouseup',['$event']) 
   onMouseUp(event:MouseEvent) {  
+
+    if (isInsideClientRect(this.Element.getBoundingClientRect(),event.pageX,event.pageY)) {
+        if (this._isMoved){
+          this.setSelected(false);
+        } else {
+          this.setSelected(!this.isSelected);
+        }
+    }
+
     if (this.returnInitialPosition)
           this.elementRef.nativeElement.setAttribute('style',"");  
      
     this._isDragging = false;     
-
+    this.Element.classList.remove(DragiumConsts.DRAGGING); 
+   
     if (this.returnInitialPosition)
     { 
        this.positionX = 0;
        this.positionY = 0;
     }
 
-    this.Element.classList.remove('dragging');
-
     this.ondrag.emit({
-      isDragging : this._isDragging ,
+      isDragging : this._isDragging,
+      data: this.data,
       positionX : this.positionX,
       positionY : this.positionY 
-  });   
+    });    
+    this._isMoved = false;
   }
 
-  @HostListener("click")
-  click(){
-     this.isSelected = !this.isSelected;
+  @HostListener("click",['$event'])
+  click(event:MouseEvent){    
+
   }
 
   @HostListener('window:mousemove',['$event'])
   onMouseMove(event:MouseEvent)
-  {    
+  {   
     if (this._isDragging){ 
       
+      this._isMoved = true;
+
       let finalX = event.clientX - this._startX;
       let finalY = event.clientY - this._startY;
 
@@ -145,6 +178,7 @@ export class DragiumDirective implements AfterViewInit {
 
       this.ondrag.emit({
         isDragging : true,
+        data :this.data,
         positionX : this.positionX,
         positionY : this.positionY 
      });

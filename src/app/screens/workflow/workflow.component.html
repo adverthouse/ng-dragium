@@ -1,4 +1,26 @@
-<div appDropium  id="WorkflowContainer">
+<div class="row">
+    <div class="col-12">
+       <div appDropium [data]="draggingItem" [connectedTo]="workflowCanvas" (dropped)="dropped($event)" id="FlowItems">
+        
+            <wf-start appDragium class="wf-item"  [isSelectable]="false" data="start" (ondrag)="flowItemDrag($event)" [returnInitialPosition]="true"></wf-start>
+            <wf-start class="wf-item" *ngIf="draggingItem == 'start'" style="opacity: 0.6;"></wf-start>
+
+            <wf-screen appDragium class="wf-item"  [isSelectable]="false" data="screen" (ondrag)="flowItemDrag($event)" [returnInitialPosition]="true"></wf-screen>
+            <wf-screen class="wf-item" *ngIf="draggingItem == 'screen'" style="opacity: 0.6;"></wf-screen>
+
+            <wf-assignment appDragium class="wf-item"  [isSelectable]="false" data="assignment" (ondrag)="flowItemDrag($event)" [returnInitialPosition]="true"></wf-assignment>
+            <wf-assignment class="wf-item" *ngIf="draggingItem == 'assignment'" style="opacity: 0.6;"></wf-assignment>
+
+            <wf-decision appDragium class="wf-item"  [isSelectable]="false" data="decision" (ondrag)="flowItemDrag($event)" [returnInitialPosition]="true"></wf-decision>
+            <wf-decision class="wf-item" *ngIf="draggingItem == 'decision'" style="opacity: 0.6;"></wf-decision>
+
+            <wf-end appDragium class="wf-item"  [isSelectable]="false" data="end" (ondrag)="flowItemDrag($event)" [returnInitialPosition]="true"></wf-end>               
+            <wf-end class="wf-item" *ngIf="draggingItem == 'end'" style="opacity: 0.6;"></wf-end>
+     
+        </div>
+    </div>     
+</div>
+<div id="WorkflowContainer">    
     <div class="toolbox">
         <button class="btn btn-default" (click)="zoomIn()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 60 60">
@@ -17,27 +39,27 @@
         </button>
     </div>
 
-    <div id="WorkflowCanvas" [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 50px)','width':'100%' }">
+    <div appDropium #canvas #workflowCanvas="appDropium" id="WorkflowCanvas" [ngStyle]="{ 'transform': 'translate(0px, 0px) scale('+scale+')' , 'overflow':'hidden','height':'calc(100% - 160px)','width':'100%' }">
 
         <div *ngFor="let flowElement of flowElements">
             <div [ngSwitch]="flowElement.type">
                 <div *ngSwitchCase="'start'">                    
-                    <wf-start appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-start>                    
+                    <wf-start appDragium [id]="flowElement.id" [showIO]="true" (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-start>                    
                 </div>
                 <div *ngSwitchCase="'connection'">
                     <wf-connection [flowElements]="flowElements" [connection]="flowElement.connection"></wf-connection>
                 </div>
                 <div *ngSwitchCase="'screen'">
-                    <wf-screen appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-screen>
+                    <wf-screen appDragium [id]="flowElement.id" [showIO]="true" (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-screen>
                 </div>
                 <div *ngSwitchCase="'assignment'">
-                    <wf-assignment appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-assignment>
+                    <wf-assignment appDragium [id]="flowElement.id" [showIO]="true" (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-assignment>
                 </div>
                 <div *ngSwitchCase="'decision'">
-                    <wf-decision appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-decision>
+                    <wf-decision appDragium [id]="flowElement.id" [showIO]="true" (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-decision>
                 </div>
                 <div *ngSwitchCase="'end'">
-                    <wf-end appDragium (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-end>
+                    <wf-end appDragium [id]="flowElement.id" [showIO]="true" (ondrag)="drag($event, flowElement)" [returnInitialPosition]="false" [positionX]="flowElement.positionX" [positionY]="flowElement.positionY"></wf-end>
                 </div>
             </div>
         </div> 

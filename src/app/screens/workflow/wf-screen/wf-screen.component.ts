@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { connection } from 'src/app/models/connection';
 
 @Component({
@@ -10,4 +10,7 @@ export class WfDecisionComponent {
 
    input:connection;
    outputs:connection[] = [];
+
+   @Input() id:number;
+   @Input() showIO:boolean = false;
 }

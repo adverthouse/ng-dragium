@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { connection } from 'src/app/models/connection';
 
 @Component({
@@ -7,5 +7,14 @@ import { connection } from 'src/app/models/connection';
   styleUrls: ['./wf-start.component.scss']
 })
 export class WfStartComponent {   
-   output:connection;
+      
+   @Input() id:number;
+   @Input() showIO:boolean = false;
+
+
+   constructor() {
+    console.log(this.id+" is start");
+    
+   }
+ 
 }

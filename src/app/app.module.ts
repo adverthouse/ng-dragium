@@ -23,6 +23,7 @@ import { WfScreenComponent } from './screens/workflow/wf-decision/wf-decision.co
 import { WfDecisionComponent } from './screens/workflow/wf-screen/wf-screen.component';
 import { WfAssignmentComponent } from './screens/workflow/wf-assignment/wf-assignment.component';
 import { WfConnectionComponent } from './screens/workflow/wf-connection/wf-connection.component';
+import { WfIoComponent } from './screens/workflow/wf-io/wf-io.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { WfConnectionComponent } from './screens/workflow/wf-connection/wf-conne
     WfScreenComponent,
     WfDecisionComponent,
     WfAssignmentComponent,
-    WfConnectionComponent
+    WfConnectionComponent,
+    WfIoComponent
   ],
   imports: [
     BrowserModule,
