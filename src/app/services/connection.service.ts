@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { connection } from '../models/connection';
 
 
 @Injectable({
@@ -7,25 +8,25 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ConnectionService {
 
-  private _isDragging = new BehaviorSubject<boolean>(false);
-  private _inputId = new BehaviorSubject<number>(0);
-  private _outputId =  new BehaviorSubject<number>(0);
+  private _connection = new BehaviorSubject<connection>({ inputId:0, outputId:0 });
+  
+  currentConnecion =  this._connection.asObservable();
 
-  currentIsDragging = this._isDragging.asObservable();
-  currentInputId = this._inputId.asObservable();
-  currentOutputId = this._outputId.asObservable();
-
+ 
   constructor() { }
 
-  changeIsDragging(isDragging:boolean){
-    this._isDragging.next(isDragging);
-  }
-
+ 
   changeInputId(inputId:number){
-    this._inputId.next(inputId);
+    const outputId = this._connection.value.outputId;
+    this._connection.next({ inputId: inputId, outputId: outputId  }); 
   }
 
   changeOutputId(outputId:number){
-    this._outputId.next(outputId);
+    const inputId = this._connection.value.inputId;
+    this._connection.next({ inputId: inputId, outputId: outputId  });  
+  }
+
+  reset(){
+    this._connection.next({ inputId:0, outputId:0})
   }
 }

@@ -26,15 +26,31 @@ export class WorkflowComponent implements OnInit {
     */
   ]
   
+  private checkPointFull:boolean = false;
+
   constructor(private connectionService:ConnectionService){
 
   }
 
   ngOnInit():void 
   {
-     this.connectionService.currentInputId.subscribe((inputId) => {
+     this.connectionService.currentConnecion.subscribe((currentConnecion) => {      
+         if (currentConnecion.inputId !=0 && currentConnecion.outputId !=0)
+         {
+            if (this.checkPointFull) return;
 
-         console.log(inputId);
+            this.checkPointFull = true;
+
+            if (this.flowElements.filter(a=>a.connection)
+                                 .some(a=> a.connection.inputId == currentConnecion.inputId &&
+                                           a.connection.outputId == currentConnecion.outputId) == false){
+               const newId = this.flowElements.length + 1;                        
+               this.flowElements.push({ id:newId, type:"connection", connection:currentConnecion });
+               console.log(this.flowElements);
+            } 
+
+            this.checkPointFull = false;
+         }
      });
   }
  
@@ -46,11 +62,14 @@ export class WorkflowComponent implements OnInit {
   dropped(event:dropEvent){
    
      if (event.previousContainer != event.container){
-        const coords = this.workflowCanvas.nativeElement.getBoundingClientRect();
-        let newId:number = 1;
-        if (this.flowElements.length != 0) newId++;
-         
-        this.flowElements.push({ id: newId, type :event.data, positionX:event.dropPositionX - coords.left ,positionY : event.dropPositionY - coords.top });
+       this.connectionService.reset();
+       
+       if (event.data != ''){
+          const coords = this.workflowCanvas.nativeElement.getBoundingClientRect();
+          let newId:number = 1;
+          if (this.flowElements.length != 0) newId++;         
+          this.flowElements.push({ id: newId, type :event.data, positionX:event.dropPositionX - coords.left ,positionY : event.dropPositionY - coords.top });        
+       }
      }
   }
 

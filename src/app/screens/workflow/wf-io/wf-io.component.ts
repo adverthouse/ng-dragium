@@ -22,48 +22,49 @@ export class WfIoComponent {
    fillColor:any = this.defaultColor;   
       
    constructor(private el:ElementRef,private connectionService:ConnectionService) {   
-    console.log(this.connectionType+"."+this.id);
+      
+   } 
+
+   assignIO(){
+      if (this.connectionType == "input") this.connectionService.changeInputId(this.id);
+      if (this.connectionType == "output") this.connectionService.changeOutputId(this.id);
    }
-
-
 
    setIsDrag(newStatus:boolean){   
     
     this._isDragging = newStatus; 
-    this.connectionService.changeIsDragging(newStatus);
-    
-    console.log(this.id+" is id");
-    if (this.connectionType == "input") this.connectionService.changeInputId(this.id);
-    if (this.connectionType == "output") this.connectionService.changeOutputId(this.id);
-    
-    // 3 ü birden dolu ise ok de ve bağla
+   
+    this.assignIO();
+
     this.fillColor = this._isDragging ? this.activeColor : this.defaultColor;    
    }
 
    mousedown(event:MouseEvent){
       event.preventDefault();  
-      this.setIsDrag(true);    
+      this.connectionService.reset();
+      this.setIsDrag(true);          
    }
 
    mousemove(event:MouseEvent)
-   { 
-    if (this._isDragging){
-        console.log("move");
-    }      
+   {  
    }
 
-   mouseup(event:MouseEvent){
+   mouseup(event:MouseEvent)
+   {         
+      this.connectionService.reset();
       this.setIsDrag(false);
    }
 
   mouseover(event:MouseEvent)
-  {
-    this.fillColor = this.activeColor;     
+  {   
+     this.assignIO();
+     this.fillColor = this.activeColor;     
   }
 
    mouseleave(event:MouseEvent){   
       if (!this._isDragging){
-        this.fillColor = this.defaultColor;
+        this.assignIO();
+        this.fillColor = this.defaultColor;   
       }
    }
 }

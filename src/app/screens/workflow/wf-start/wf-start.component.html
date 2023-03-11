@@ -4,6 +4,6 @@
     <path id="Polygon_1" data-name="Polygon 1" d="M26,0,52,31H0Z" transform="translate(1011.5 603) rotate(90)" fill="#fff"/>
     </g>
 </svg>
-<div *ngIf="showIO">
-    <wf-io top="50" left="20" [id]="id" [connectionType]="output"></wf-io>
+<div *ngIf="showIO && id">
+    <wf-io top="50" left="20" [id]="id" [connectionType]="'output'"></wf-io>
 </div>

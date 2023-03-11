@@ -8,13 +8,13 @@ import { connection } from 'src/app/models/connection';
 })
 export class WfStartComponent {   
       
-   @Input() id:number;
+   @Input() id?:number;
    @Input() showIO:boolean = false;
 
 
-   constructor() {
-    console.log(this.id+" is start");
+   constructor() { 
     
-   }
+   }    
+ 
  
 }
