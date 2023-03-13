@@ -19,33 +19,45 @@ export class WfConnectionComponent implements AfterViewInit   {
   positionY?:number;
 
   ngAfterViewInit(){    
-    const start = this.flowElements.find(a => a.id == this.connection.inputId);
-    const end = this.flowElements.find(a => a.id == this.connection.outputId);
+    const input = this.flowElements.find(a => a.id == this.connection.inputId);
+    const output = this.flowElements.find(a => a.id == this.connection.outputId);
 
-    this.positionX = end.positionX;
-    this.positionY = end.positionY;
+    //this.positionX = end.positionX;
+    //this.positionY = end.positionY;
 
-    this.width = end.positionX - start.positionX > 0 ? end.positionX - start.positionX : start.positionX - end.positionX;
-    this.height = end.positionY - start.positionY > 0 ? end.positionY - start.positionY : start.positionY - end.positionY;
+    //this.width = end.positionX - start.positionX > 0 ? end.positionX - start.positionX : start.positionX - end.positionX;
+    //this.height = end.positionY - start.positionY > 0 ? end.positionY - start.positionY : start.positionY - end.positionY;
   } 
  
 
   pathExpression()
   {
-    const start = this.flowElements.find(a => a.id == this.connection.inputId);
-    const end = this.flowElements.find(a => a.id == this.connection.outputId);
-
+    
+    const input = this.flowElements.find(a => a.id == this.connection.inputId);
+    const output = this.flowElements.find(a => a.id == this.connection.outputId);
+    
+ 
     const curveWH = 30;  
     const elementCenter = 32;  
 
-    let p1x = 30;
-    let p1y = 60;
-
-    let p2x =  start.positionX - end.positionX; 
-    let p2y =  start.positionY - end.positionY ; 
-
+    let x1 = output.positionX;
+    let y1 = output.positionY;
     
+    let x4 = input.positionX;
+    let y4 = input.positionY;
+
+    let dx = Math.abs(x4 - x1)/3;
+  
+    let x2 = x1 - dx;
+    let x3 = x4 + dx;
+    
+    let data = `M${x1} ${y1} C ${x1+30} ${y1+30} ${x4} ${y4} ${x2} ${y4}`;
+
+    console.log(data); 
+
+     return data;
+     
    // return  `M${p1x} ${p1y} C${p1x} ${p1y} ${(p2x - p1x)/2} ${(p2y - p1y)/2} ${p2x} ${p2y}`
-     return `M ${p1x} ${p1y} L ${p2x} ${p2y}`    
+     // return `M ${p1x} ${p1y} L ${p2x} ${p2y}`    
    }
 }

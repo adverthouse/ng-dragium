@@ -16,14 +16,13 @@ export class WorkflowComponent implements OnInit {
   scale:number = 1;
   draggingItem:string = "";
   flowElements:FlowElement[] = [
-   /* { id:1, type:"start",positionX: 80, positionY: 50},
-    { id:2, type:"connection", connection:{ inputId:1, outputId: 3}} ,
-    { id:7, type:"end",positionX: 60, positionY: 550},
+    { id:1, type:"start",positionX: 80, positionY: 50},
+    { id:2, type:"connection", connection:{ inputId:3, outputId: 1}} ,
+    //{ id:7, type:"end",positionX: 60, positionY: 550},
     { id:3, type:"screen",positionX: 250, positionY: 250},
-    { id:4, type:"connection", connection:{ inputId:3, outputId: 5}} ,
-    { id:5, type:"assignment",positionX: 370, positionY: 420},
-    { id:6, type:"decision",positionX: 60, positionY: 450},    
-    */
+    //{ id:4, type:"connection", connection:{ inputId:3, outputId: 5}} ,
+    //{ id:5, type:"assignment",positionX: 370, positionY: 420},
+    //{ id:6, type:"decision",positionX: 60, positionY: 450},        
   ]
   
   private checkPointFull:boolean = false;

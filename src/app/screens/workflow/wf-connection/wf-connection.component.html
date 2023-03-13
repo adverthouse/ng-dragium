@@ -1,6 +1,6 @@
-<div *ngIf="positionX">
-    <div [ngStyle]="{ 'transform':'translate3d('+positionX+'px,'+positionY+'px,0px)', 'z-index':'1','position':'absolute' }">
-        <svg [attr.height]="height + 4" [attr.width]="width + 4">
+<div>
+    <div>
+        <svg style="position:fixed;position: fixed; fill: none;  stroke: dodgerblue; stroke-width: 2;">
             <path [attr.d]="pathExpression()" stroke="#2055bb" stroke-width="2" fill="none" />
         </svg> 
     </div> 
