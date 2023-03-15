@@ -6,10 +6,10 @@ import { connection } from 'src/app/models/connection';
   templateUrl: './wf-screen.component.html',
   styleUrls: ['./wf-screen.component.scss']
 })
-export class WfDecisionComponent {
+export class WfScreenComponent {
 
    input:connection;
-   outputs:connection[] = [];
+   output:connection;
 
    @Input() id:number;
    @Input() showIO:boolean = false;

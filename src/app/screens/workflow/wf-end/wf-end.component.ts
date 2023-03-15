@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'wf-end',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./wf-end.component.scss']
 })
 export class WfEndComponent {
+  
+  @Input() id?:number;
+  @Input() showIO:boolean = false;
 
 }

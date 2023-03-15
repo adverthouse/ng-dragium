@@ -6,3 +6,6 @@
     <path id="Path_3" data-name="Path 3" d="M3388.3,442.39h9.28V450.8l7.1,5.486v3.595h-24.011v-3.595l7.628-5.486Z" transform="translate(-1863.424 -5.308)" fill="#fff"/>
     </g>
 </svg>    
+<div *ngIf="showIO && id">
+    <wf-io top="20" left="-15" [id]="id" [connectionType]="'output'"></wf-io>
+</div>
